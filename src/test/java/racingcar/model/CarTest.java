@@ -46,8 +46,27 @@ public class CarTest {
     }
 
     @ParameterizedTest
+    @ValueSource(strings = {"a", "ab", "a c", "AbCd", "a1cd3"})
+    void 유효한_이름_생성_테스트(String input) {
+        // when
+        Car car = CarFactory.of(input);
+
+        // then
+        assertEquals(input, car.getName());
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"", "  ", "\t", "\n"})
     void 이름_공백_IllegalArgumentException(String input) {
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> {
+            CarFactory.of(input);
+        });
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"car@", "c\nr", "c\tar", "ca;r"})
+    void 이름_특수문자_IllegalArgumentException(String input) {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
             CarFactory.of(input);
