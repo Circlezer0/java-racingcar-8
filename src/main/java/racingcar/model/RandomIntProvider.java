@@ -7,12 +7,7 @@ public class RandomIntProvider implements IntProvider{
     private final int max;
 
     public RandomIntProvider(int min, int max) {
-        if(min > max) {
-            throw new IllegalArgumentException("최소값은 최대값보다 클 수 없습니다.");
-        }
-        if(min < 0) {
-            throw new IllegalArgumentException("최소값과 최대값은 음수일 수 없습니다.");
-        }
+        rangeValidation(min, max);
         this.min = min;
         this.max = max;
     }
@@ -20,5 +15,14 @@ public class RandomIntProvider implements IntProvider{
     @Override
     public int nextInt() {
         return Randoms.pickNumberInRange(min, max);
+    }
+
+    private void rangeValidation(int min, int max) {
+        if(min > max) {
+            throw new IllegalArgumentException("최소값은 최대값보다 클 수 없습니다.");
+        }
+        if(min < 0) {
+            throw new IllegalArgumentException("최소값과 최대값은 음수일 수 없습니다.");
+        }
     }
 }
