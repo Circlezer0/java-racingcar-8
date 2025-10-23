@@ -1,19 +1,18 @@
 package racingcar.model;
 
-public class CarFactory {
+public record CarName(String name) {
 
     private static final int MAX_NAME_LENGTH = 5;
     private static final String NAME_PATTERN = "[A-Za-z0-9 ]+";
 
-    public static Car of(String name) {
-        String normalizeName = normalizeName(name);
-        validateName(normalizeName);
-
-        return new Car(normalizeName);
+    public CarName(String name) {
+        String normalizedName = normalizeName(name);
+        validateName(normalizedName);
+        this.name = normalizedName;
     }
 
     private static String normalizeName(String name) {
-        if(name == null) {
+        if (name == null) {
             return "";
         }
         return name.trim();
