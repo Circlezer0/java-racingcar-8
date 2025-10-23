@@ -47,7 +47,7 @@ public class SequenceIntProviderTest {
     @Test
     void 시퀀스_null_일_때_IllegalArgumentException() {
         // then
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             new SequenceIntProvider(null);
         });
     }
