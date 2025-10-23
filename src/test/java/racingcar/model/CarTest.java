@@ -15,23 +15,23 @@ public class CarTest {
         String name = "car";
 
         // when
-        Car car = Car.of("car");
+        Car car = CarFactory.of("car");
 
         // then
-        assertEquals(car.getName(), "car");
-        assertEquals(car.getPosition(), 0);
+        assertEquals("car", car.getName());
+        assertEquals(0, car.getPosition());
     }
 
     @Test
     void 이동_테스트() {
         // given
-        Car car = Car.of("car");
+        Car car = CarFactory.of("car");
 
         // when
         car.move();
 
         // then
-        assertEquals(car.getPosition(), 1);
+        assertEquals(1, car.getPosition());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class CarTest {
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            Car.of(name);
+            CarFactory.of(name);
         });
     }
 
@@ -50,18 +50,15 @@ public class CarTest {
     void 이름_공백_IllegalArgumentException(String input) {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            Car.of(input);
+            CarFactory.of(input);
         });
     }
 
     @Test
     void 이름_null_IllegalArgumentException() {
-        // given
-        String name = null;
-
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            Car.of(name);
+            CarFactory.of(null);
         });
     }
 }
