@@ -1,5 +1,7 @@
 package racingcar.model;
 
+import racingcar.model.provider.IntProvider;
+
 public class SequenceIntProvider implements IntProvider {
     private final int[] numberSequence;
     private int currentPosition;

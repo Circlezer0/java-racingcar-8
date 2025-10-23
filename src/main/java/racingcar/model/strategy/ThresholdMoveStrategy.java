@@ -1,4 +1,6 @@
-package racingcar.model;
+package racingcar.model.strategy;
+
+import racingcar.model.provider.IntProvider;
 
 public class ThresholdMoveStrategy implements MoveStrategy{
 
