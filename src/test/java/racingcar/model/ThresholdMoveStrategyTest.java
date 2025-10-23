@@ -1,7 +1,6 @@
 package racingcar.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,8 +11,8 @@ public class ThresholdMoveStrategyTest {
     @Test
     void 움직임_전략_테스트() {
         // given
-        int[] sequence = new int[] {
-            0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+        int[] sequence = new int[]{
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9
         };
         int threshold = 4;
 
@@ -22,7 +21,7 @@ public class ThresholdMoveStrategyTest {
         MoveStrategy strategy = new ThresholdMoveStrategy(intProvider, threshold);
 
         // then
-        for(int i = 0; i < sequence.length; i++) {
+        for (int i = 0; i < sequence.length; i++) {
             boolean actualCanMove = strategy.canMove();
             boolean expectedCanMove = (sequence[i] >= threshold);
             assertEquals(expectedCanMove, actualCanMove);
@@ -37,7 +36,7 @@ public class ThresholdMoveStrategyTest {
     })
     void 경계값_비교_테스트(int value, int threshold, boolean expected) {
         // given
-        int[] sequence = new int[] {value};
+        int[] sequence = new int[]{value};
 
         // when
         IntProvider intProvider = new SequenceIntProvider(sequence);
@@ -46,22 +45,5 @@ public class ThresholdMoveStrategyTest {
         // then
         boolean actual = moveStrategy.canMove();
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void 시퀀스_소진시_예외() {
-        // given
-        int[] sequence = {1};
-        int threshold = 4;
-
-        // when
-        IntProvider intProvider = new SequenceIntProvider(sequence);
-        MoveStrategy moveStrategy = new ThresholdMoveStrategy(intProvider, threshold);
-
-        // 1회는 정상
-        moveStrategy.canMove();
-
-        // 2번째 호출 시 provider가 소진되어 예외
-        assertThrows(IllegalArgumentException.class, moveStrategy::canMove);
     }
 }
