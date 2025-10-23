@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.List;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.model.provider.IntProvider;
 import racingcar.model.provider.SequenceIntProvider;
@@ -26,13 +27,15 @@ class CarsTest {
     }
 
     @Test
-    void 자동차들_정상생성_테스트() {
+    @DisplayName("자동차들 정상생성 테스트")
+    void createCarsTest() {
         // when & then
         assertDoesNotThrow(() -> CarsFactory.of(names));
     }
 
     @Test
-    void 입력_순서_유지_테스트() {
+    @DisplayName("입력 순서 유지 테스트")
+    void createOrderTest() {
         // then
         String[] expected = names.toArray(new String[0]);
 
@@ -42,7 +45,8 @@ class CarsTest {
     }
 
     @Test
-    void 최대_개수_10개_테스트() {
+    @DisplayName("최대 개수 10개 테스트")
+    void createMaxCarsTest() {
         // given
         List<String> maxNames = List.of(
                 "car1", "car2", "car3", "car4", "car5",
@@ -54,7 +58,8 @@ class CarsTest {
     }
 
     @Test
-    void 움직임_전략_적용_테스트() {
+    @DisplayName("움직임 전략 적용 테스트")
+    void moveStrategyTest() {
         // given
         IntProvider intProvider = new SequenceIntProvider(new int[]{
                 5, 3, 9,    // Round 1 (T F T)
@@ -78,7 +83,8 @@ class CarsTest {
     }
 
     @Test
-    void 단독_우승_테스트() {
+    @DisplayName("단독 우승자 테스트")
+    void soloWinnerTest() {
         // given
         IntProvider intProvider = new SequenceIntProvider(new int[]{
                 9, 0, 0,    // Round 1 (T F F)
@@ -99,7 +105,8 @@ class CarsTest {
     }
 
     @Test
-    void 공동_우승자_테스트() {
+    @DisplayName("공동 우승자 테스트")
+    void multipleWinnersTest() {
         // given
         IntProvider intProvider = new SequenceIntProvider(new int[]{
                 5, 4, 0,    // Round 1 (T T F)
@@ -121,7 +128,8 @@ class CarsTest {
     }
 
     @Test
-    void 시도횟수_0일때_공동우승() {
+    @DisplayName("시도 횟수 0일 때 공동 우승 테스트")
+    void zeroRoundMultipleWinnersTest() {
         // when
         List<CarName> winners = cars.calculateWinners();
 
@@ -133,7 +141,8 @@ class CarsTest {
     }
 
     @Test
-    void 빈_리스트_IllegalArgumentException() {
+    @DisplayName("빈 리스트 입력시 IllegalArgumentException")
+    void emptyListErrorTest() {
         // given
         List<String> emptyNames = List.of();
 
@@ -142,13 +151,15 @@ class CarsTest {
     }
 
     @Test
-    void null_리스트_IllegalArgumentException() {
+    @DisplayName("null 리스트 입력시 IllegalArgumentException")
+    void nullListErrorTest() {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> CarsFactory.of(null));
     }
 
     @Test
-    void 최대_개수_10개_초과시_IllegalArgumentException() {
+    @DisplayName("최대 개수 10개 초과시 IllegalArgumentException")
+    void exceedMaxCarsErrorTest() {
         // given
         List<String> namesOverflow = List.of(
                 "car1", "car2", "car3", "car4", "car5",
@@ -160,7 +171,8 @@ class CarsTest {
     }
 
     @Test
-    void 중복_이름_입력시_IllegalArgumentException() {
+    @DisplayName("중복 이름 입력시 IllegalArgumentException")
+    void duplicateNamesErrorTest() {
         // given
         List<String> duplicatedNames = List.of("car1", "car2", "car1");
 
