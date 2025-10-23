@@ -1,4 +1,4 @@
-package racingcar.model;
+package racingcar.model.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import racingcar.model.provider.IntProvider;
-import racingcar.model.strategy.MoveStrategy;
-import racingcar.model.strategy.ThresholdMoveStrategy;
+import racingcar.model.provider.SequenceIntProvider;
 
 public class ThresholdMoveStrategyTest {
 

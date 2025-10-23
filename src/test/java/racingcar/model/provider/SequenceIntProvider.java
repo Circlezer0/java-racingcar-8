@@ -1,6 +1,4 @@
-package racingcar.model;
-
-import racingcar.model.provider.IntProvider;
+package racingcar.model.provider;
 
 public class SequenceIntProvider implements IntProvider {
     private final int[] numberSequence;
