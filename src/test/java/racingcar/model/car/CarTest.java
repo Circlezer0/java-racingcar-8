@@ -3,6 +3,7 @@ package racingcar.model.car;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,7 +11,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class CarTest {
 
     @Test
-    void 객체_생성_테스트() {
+    @DisplayName("객체 생성 테스트")
+    void createCarTest() {
         // given
         String name = "car";
 
@@ -23,7 +25,8 @@ public class CarTest {
     }
 
     @Test
-    void 이동_테스트() {
+    @DisplayName("이동 테스트")
+    void moveCarTest() {
         // given
         Car car = Car.of("car");
 
@@ -34,8 +37,20 @@ public class CarTest {
         assertEquals(1, car.getPosition());
     }
 
+    @ParameterizedTest
+    @DisplayName("유효한 이름 생성 테스트")
+    @ValueSource(strings = {"a", "ab", "a c", "AbCd", "a1cd3"})
+    void validNameTest(String input) {
+        // when
+        Car car = Car.of(input);
+
+        // then
+        assertEquals(input, car.getName());
+    }
+
     @Test
-    void 이름_길이_5자_초과_IllegalArgumentException() {
+    @DisplayName("이름 길이 5자 초과 IllegalArgumentException")
+    void nameMaxLengthErrorTest() {
         // given
         String name = "llllll";
 
@@ -46,18 +61,9 @@ public class CarTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"a", "ab", "a c", "AbCd", "a1cd3"})
-    void 유효한_이름_생성_테스트(String input) {
-        // when
-        Car car = Car.of(input);
-
-        // then
-        assertEquals(input, car.getName());
-    }
-
-    @ParameterizedTest
+    @DisplayName("이름이 공백일 때 IllegalArgumentException")
     @ValueSource(strings = {"", "  ", "\t", "\n"})
-    void 이름_공백_IllegalArgumentException(String input) {
+    void emptyNameErrorTest(String input) {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
             Car.of(input);
@@ -65,8 +71,9 @@ public class CarTest {
     }
 
     @ParameterizedTest
+    @DisplayName("이름에 특수문자 포함 IllegalArgumentException")
     @ValueSource(strings = {"car@", "c\nr", "c\tar", "ca;r"})
-    void 이름_특수문자_IllegalArgumentException(String input) {
+    void specialCharacterNameErrorTest(String input) {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
             Car.of(input);
@@ -74,7 +81,8 @@ public class CarTest {
     }
 
     @Test
-    void 이름_null_IllegalArgumentException() {
+    @DisplayName("이름이 null일 때 IllegalArgumentException")
+    void nullNameErrorTest() {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
             Car.of(null);
