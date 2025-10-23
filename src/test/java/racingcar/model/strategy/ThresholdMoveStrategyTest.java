@@ -20,14 +20,13 @@ public class ThresholdMoveStrategyTest {
         };
         int threshold = 4;
 
-        // when
         IntProvider intProvider = new SequenceIntProvider(sequence);
         MoveStrategy strategy = new ThresholdMoveStrategy(intProvider, threshold);
 
-        // then
-        for (int i = 0; i < sequence.length; i++) {
+        // when & then
+        for (int currentInt : sequence) {
             boolean actualCanMove = strategy.canMove();
-            boolean expectedCanMove = (sequence[i] >= threshold);
+            boolean expectedCanMove = (currentInt >= threshold);
             assertEquals(expectedCanMove, actualCanMove);
         }
     }
