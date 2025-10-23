@@ -3,12 +3,14 @@ package racingcar.model.provider;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class SequenceIntProviderTest {
 
     @Test
-    void 순차적_정수_제공_테스트() {
+    @DisplayName("순차적 정수 제공 테스트")
+    void sequentialIntProvisionTest() {
         // given
         int[] sequence = {3, 5, 2, 8, 1};
         SequenceIntProvider intProvider = new SequenceIntProvider(sequence);
@@ -21,7 +23,8 @@ public class SequenceIntProviderTest {
     }
 
     @Test
-    void 시퀀스_초과_호출시_IllegalArgumentException() {
+    @DisplayName("시퀀스 초과 호출시 IllegalArgumentException")
+    void sequenceLimitExceededErrorTest() {
         // given
         int[] sequence = {3, 5};
         SequenceIntProvider intProvider = new SequenceIntProvider(sequence);
@@ -35,18 +38,20 @@ public class SequenceIntProviderTest {
     }
 
     @Test
-    void 시퀀스_빈_값에서_호출시_IllegalArgumentException() {
+    @DisplayName("시퀀스 빈 값에서 호출시 IllegalArgumentException")
+    void emptySequenceErrorTest() {
         // given
         int[] sequence = {};
         SequenceIntProvider intProvider = new SequenceIntProvider(sequence);
 
-        // then
+        // when & then
         assertThrows(IllegalArgumentException.class, intProvider::nextInt);
     }
 
     @Test
-    void 시퀀스_null_일_때_IllegalArgumentException() {
-        // then
+    @DisplayName("시퀀스 null 일 때 IllegalArgumentException")
+    void nullSequenceErrorTest() {
+        // when & then
         assertThrows(IllegalArgumentException.class, () -> {
             new SequenceIntProvider(null);
         });
