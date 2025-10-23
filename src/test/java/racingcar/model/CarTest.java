@@ -15,7 +15,7 @@ public class CarTest {
         String name = "car";
 
         // when
-        Car car = CarFactory.of("car");
+        Car car = Car.of("car");
 
         // then
         assertEquals("car", car.getName());
@@ -25,7 +25,7 @@ public class CarTest {
     @Test
     void 이동_테스트() {
         // given
-        Car car = CarFactory.of("car");
+        Car car = Car.of("car");
 
         // when
         car.move();
@@ -41,7 +41,7 @@ public class CarTest {
 
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            CarFactory.of(name);
+            Car.of(name);
         });
     }
 
@@ -49,7 +49,7 @@ public class CarTest {
     @ValueSource(strings = {"a", "ab", "a c", "AbCd", "a1cd3"})
     void 유효한_이름_생성_테스트(String input) {
         // when
-        Car car = CarFactory.of(input);
+        Car car = Car.of(input);
 
         // then
         assertEquals(input, car.getName());
@@ -60,7 +60,7 @@ public class CarTest {
     void 이름_공백_IllegalArgumentException(String input) {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            CarFactory.of(input);
+            Car.of(input);
         });
     }
 
@@ -69,7 +69,7 @@ public class CarTest {
     void 이름_특수문자_IllegalArgumentException(String input) {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            CarFactory.of(input);
+            Car.of(input);
         });
     }
 
@@ -77,7 +77,7 @@ public class CarTest {
     void 이름_null_IllegalArgumentException() {
         // when & then
         assertThrows(IllegalArgumentException.class, () -> {
-            CarFactory.of(null);
+            Car.of(null);
         });
     }
 }
