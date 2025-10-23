@@ -49,17 +49,33 @@
 ## 객체 정의
 
 - **Model**
-    - Car
-        - 인스턴스 : 이름, 현재 위치
-        - 기능 : 이름 유효성 검증, 전진
-    - Cars
-        - 인스턴스 : List<Car>
-        - 기능 : 자동차 전진 여부 결정, 자동차 전진 수행, 우승자 계산
-    - MoveStrategy
-        - 기능 : 전진 여부를 결정하는 전략 인터페이스
-    - RandomMoveStrategy
-        - 인스턴스 : 랜덤 모듈
-        - 기능 : 랜덤 값을 기반으로 전진 여부를 결정
+    - **car**
+        - 자동차와 관련된 객체들
+        - CarName
+            - 인스턴스 : 이름, 최대 길이, 이름 패턴
+            - 기능 : 이름에 대한 정보 및 유효성 검사
+        - Car
+            - 인스턴스 : CarName, 현재 위치
+            - 기능 : 이름 조회, 현재 위치, 전진
+        - Cars
+            - 인스턴스 : List<Car>
+            - 기능 : 자동차 전진 여부 결정, 자동차 전진 수행, 우승자 계산
+    - **strategy**
+        - 전진 전략과 관련된 객체들
+        - MoveStrategy
+            - 기능 : 전진 여부를 결정하는 전략 인터페이스
+        - ThresholdMoveStrategy
+            - 인스턴스 : 정수 공급자, 임계값
+            - 기능 : 정수 공급자에서 획득한 정수를 기반으로 임계값에 따라 전진 여부 결정
+    - **provider**
+        - 정수 공급자와 관련된 객체들
+        - NumberProvider
+            - 기능 : 정수를 제공하는 인터페이스
+        - RandomNumberProvider
+            - 기능 : 0에서 9 사이의 랜덤 정수를 제공
+        - SequenceNumberProvider
+            - 인스턴스 : 정수 리스트
+            - 기능 : 리스트에 정의된 정수를 순차적으로 제공
 - **Service**
     - RaceService
         - 인스턴스 : Cars, MoveStrategy
