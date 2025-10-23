@@ -2,6 +2,7 @@ package racingcar.model.strategy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -11,7 +12,8 @@ import racingcar.model.provider.SequenceIntProvider;
 public class ThresholdMoveStrategyTest {
 
     @Test
-    void 움직임_전략_테스트() {
+    @DisplayName("움직임 전략 테스트")
+    void moveStrategyTest() {
         // given
         int[] sequence = new int[]{
                 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
@@ -31,12 +33,13 @@ public class ThresholdMoveStrategyTest {
     }
 
     @ParameterizedTest(name = "value={0}, threshold={1} => canMove={2}")
+    @DisplayName("경계값 비교 테스트")
     @CsvSource({
             "3, 4, false",   // 아래
             "4, 4, true",    // 같음
             "5, 4, true"     // 초과
     })
-    void 경계값_비교_테스트(int value, int threshold, boolean expected) {
+    void boundaryValueTest(int value, int threshold, boolean expected) {
         // given
         int[] sequence = new int[]{value};
 
