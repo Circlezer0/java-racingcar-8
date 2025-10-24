@@ -19,8 +19,9 @@ import racingcar.model.strategy.ThresholdMoveStrategy;
 
 public class RaceServiceTest {
 
-    Cars cars;
-    MoveStrategy moveStrategy;
+    private Cars cars;
+    private MoveStrategy moveStrategy;
+    private List<CarStatus> recentCarStatuses;
 
     @BeforeEach
     void setUp() {
@@ -44,7 +45,7 @@ public class RaceServiceTest {
         RaceService raceService = new RaceService(moveStrategy);
 
         // when
-        raceService.playRound(cars);
+        recentCarStatuses = raceService.playRound(cars);
 
         // then
         Tuple[] expected = {
@@ -53,7 +54,7 @@ public class RaceServiceTest {
                 tuple("car3", 1)
         };
 
-        assertThat(cars.getCarStatuses())
+        assertThat(recentCarStatuses)
                 .extracting(CarStatus::name, CarStatus::position)
                 .containsExactly(expected);
     }
@@ -67,7 +68,7 @@ public class RaceServiceTest {
 
         // when
         for (int i = 0; i < totalRounds; i++) {
-            raceService.playRound(cars);
+            recentCarStatuses = raceService.playRound(cars);
         }
 
         // then
@@ -77,7 +78,7 @@ public class RaceServiceTest {
                 tuple("car3", 3)
         };
 
-        assertThat(cars.getCarStatuses())
+        assertThat(recentCarStatuses)
                 .extracting(CarStatus::name, CarStatus::position)
                 .containsExactly(expected);
     }
@@ -91,7 +92,7 @@ public class RaceServiceTest {
 
         // when
         for (int i = 0; i < totalRounds; i++) {
-            raceService.playRound(cars);
+            recentCarStatuses = raceService.playRound(cars);
         }
         List<CarName> winners = raceService.getWinners(cars);
 
@@ -107,15 +108,16 @@ public class RaceServiceTest {
         // given
         RaceService raceService = new RaceService(moveStrategy);
         Cars newCars = CarsFactory.of(List.of("alpha", "beta"));
+        List<CarStatus> oldCarStatuses, newCarStatuses;
 
         // when
         raceService.playRound(cars);
         raceService.playRound(cars);
-        raceService.playRound(cars);
+        oldCarStatuses = raceService.playRound(cars);
 
         raceService.playRound(newCars);
         raceService.playRound(newCars);
-        raceService.playRound(newCars);
+        newCarStatuses = raceService.playRound(newCars);
 
         // then
         Tuple[] expectedOldCars = {
@@ -123,7 +125,7 @@ public class RaceServiceTest {
                 tuple("car2", 0),
                 tuple("car3", 3)
         };
-        assertThat(cars.getCarStatuses())
+        assertThat(oldCarStatuses)
                 .extracting(CarStatus::name, CarStatus::position)
                 .containsExactly(expectedOldCars);
 
@@ -131,7 +133,7 @@ public class RaceServiceTest {
                 tuple("alpha", 1),
                 tuple("beta", 0)
         };
-        assertThat(newCars.getCarStatuses())
+        assertThat(newCarStatuses)
                 .extracting(CarStatus::name, CarStatus::position)
                 .containsExactly(expectedNewCars);
     }
