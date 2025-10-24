@@ -78,8 +78,10 @@
             - 기능 : 리스트에 정의된 정수를 순차적으로 제공
 - **Service**
     - RaceService
-        - 인스턴스 : Cars, MoveStrategy
-        - 기능 : 시도한 횟수 만큼 Cars의 일괄 전진을 수행. 수행 후 결과를 반환
+        - 인스턴스 : MoveStrategy
+        - 기능 : 시도한 횟수 만큼 Cars의 일괄 전진을 수행. 수행 후 결과를 반환. 우승자 계산
+    - ParseService
+        - 기능 : 입력된 자동차 이름 문자열을 파싱하여 List<String> 으로 반환
 - **Controller**
     - RaceController
         - 인스턴스 : RaceService, RaceView
