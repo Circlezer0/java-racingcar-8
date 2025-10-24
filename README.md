@@ -79,13 +79,13 @@
 - **Service**
     - RaceService
         - 인스턴스 : MoveStrategy
-        - 기능 : 시도한 횟수 만큼 Cars의 일괄 전진을 수행. 수행 후 결과를 반환. 우승자 계산
+        - 기능 : Cars의 일괄 전진을 수행. 수행 후 결과를 반환. 우승자 계산
     - ParseService
         - 기능 : 입력된 자동차 이름 문자열을 파싱하여 List<String> 으로 반환
 - **Controller**
     - RaceController
         - 인스턴스 : RaceService, RaceView
-        - 기능 : 입력과 서비스 로직 제어
+        - 기능 : 입력과 서비스 로직 제어, 시도 횟수만큼 라운드 실행 요청 및 결과 출력 요청, 최종 우승자 출력 요청
 - **View**
     - RaceView
         - 인스턴스 : InputHandler, OutputHandler
