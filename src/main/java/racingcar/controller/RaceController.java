@@ -43,8 +43,8 @@ public class RaceController {
     }
 
     private void validateRounds(int rounds) {
-        if (rounds < 1 || rounds > MAX_TRY_COUNT) {
-            throw new IllegalArgumentException("시도 횟수는 1 이상 " + MAX_TRY_COUNT + " 이하만 가능합니다.");
+        if (rounds < 0 || rounds > MAX_TRY_COUNT) {
+            throw new IllegalArgumentException("시도 횟수는 0 이상 " + MAX_TRY_COUNT + " 이하만 가능합니다.");
         }
     }
 }
