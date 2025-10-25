@@ -14,7 +14,7 @@ public class Car {
         return new Car(carName);
     }
 
-    public CarName getName() {
+    public CarName getCarName() {
         return name;
     }
 

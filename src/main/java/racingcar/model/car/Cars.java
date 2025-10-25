@@ -13,7 +13,7 @@ public class Cars {
 
     public List<CarStatus> getCarStatuses() {
         return carList.stream()
-                .map(car -> new CarStatus(car.getName(), car.getPosition()))
+                .map(car -> new CarStatus(car.getCarName(), car.getPosition()))
                 .toList();
     }
 
@@ -25,7 +25,7 @@ public class Cars {
 
         return carList.stream()
                 .filter(car -> car.getPosition() == maxPosition)
-                .map(Car::getName)
+                .map(Car::getCarName)
                 .toList();
     }
 

@@ -21,7 +21,7 @@ public class CarTest {
 
         // then
         CarName expectedCarName = new CarName(name);
-        assertEquals(expectedCarName, car.getName());
+        assertEquals(expectedCarName, car.getCarName());
         assertEquals(0, car.getPosition());
     }
 
@@ -47,7 +47,7 @@ public class CarTest {
 
         // then
         CarName expectedCarName = new CarName(input);
-        assertEquals(expectedCarName, car.getName());
+        assertEquals(expectedCarName, car.getCarName());
     }
 
     @Test
