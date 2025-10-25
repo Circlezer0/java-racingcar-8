@@ -49,13 +49,13 @@ public class RaceServiceTest {
 
         // then
         Tuple[] expected = {
-                tuple("car1", 1),
-                tuple("car2", 0),
-                tuple("car3", 1)
+                tuple(new CarName("car1"), 1),
+                tuple(new CarName("car2"), 0),
+                tuple(new CarName("car3"), 1)
         };
 
         assertThat(recentCarStatuses)
-                .extracting(CarStatus::name, CarStatus::position)
+                .extracting(CarStatus::carName, CarStatus::position)
                 .containsExactly(expected);
     }
 
@@ -73,13 +73,13 @@ public class RaceServiceTest {
 
         // then
         Tuple[] expected = {
-                tuple("car1", 2),
-                tuple("car2", 1),
-                tuple("car3", 3)
+                tuple(new CarName("car1"), 2),
+                tuple(new CarName("car2"), 1),
+                tuple(new CarName("car3"), 3)
         };
 
         assertThat(recentCarStatuses)
-                .extracting(CarStatus::name, CarStatus::position)
+                .extracting(CarStatus::carName, CarStatus::position)
                 .containsExactly(expected);
     }
 
@@ -98,8 +98,7 @@ public class RaceServiceTest {
 
         // then
         assertThat(winners)
-                .extracting(CarName::name)
-                .containsExactly("car3");
+                .containsExactly(new CarName("car3"));
     }
 
     @Test
@@ -121,20 +120,20 @@ public class RaceServiceTest {
 
         // then
         Tuple[] expectedOldCars = {
-                tuple("car1", 2),
-                tuple("car2", 0),
-                tuple("car3", 3)
+                tuple(new CarName("car1"), 2),
+                tuple(new CarName("car2"), 0),
+                tuple(new CarName("car3"), 3)
         };
         assertThat(oldCarStatuses)
-                .extracting(CarStatus::name, CarStatus::position)
+                .extracting(CarStatus::carName, CarStatus::position)
                 .containsExactly(expectedOldCars);
 
         Tuple[] expectedNewCars = {
-                tuple("alpha", 1),
-                tuple("beta", 0)
+                tuple(new CarName("alpha"), 1),
+                tuple(new CarName("beta"), 0)
         };
         assertThat(newCarStatuses)
-                .extracting(CarStatus::name, CarStatus::position)
+                .extracting(CarStatus::carName, CarStatus::position)
                 .containsExactly(expectedNewCars);
     }
 }

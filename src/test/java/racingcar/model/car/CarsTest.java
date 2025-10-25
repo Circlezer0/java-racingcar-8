@@ -37,10 +37,12 @@ class CarsTest {
     @DisplayName("입력 순서 유지 테스트")
     void createOrderTest() {
         // then
-        String[] expected = names.toArray(new String[0]);
+        CarName[] expected = names.stream()
+                .map(CarName::new)
+                .toArray(CarName[]::new);
 
         assertThat(cars.getCarStatuses())
-                .extracting(CarStatus::name)
+                .extracting(CarStatus::carName)
                 .containsExactly(expected);
     }
 
@@ -71,14 +73,14 @@ class CarsTest {
         runRounds(cars, moveStrategy, 2);
 
         // then
-        Tuple[] expected = {
-                tuple("car1", 1),
-                tuple("car2", 1),
-                tuple("car3", 1)
+        Tuple[] expected = new Tuple[]{
+                tuple(new CarName("car1"), 1),
+                tuple(new CarName("car2"), 1),
+                tuple(new CarName("car3"), 1)
         };
 
         assertThat(cars.getCarStatuses())
-                .extracting(CarStatus::name, CarStatus::position)
+                .extracting(CarStatus::carName, CarStatus::position)
                 .containsExactly(expected);
     }
 

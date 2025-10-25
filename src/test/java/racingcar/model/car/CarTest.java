@@ -20,7 +20,8 @@ public class CarTest {
         Car car = Car.of("car");
 
         // then
-        assertEquals("car", car.getName());
+        CarName expectedCarName = new CarName(name);
+        assertEquals(expectedCarName, car.getName());
         assertEquals(0, car.getPosition());
     }
 
@@ -45,7 +46,8 @@ public class CarTest {
         Car car = Car.of(input);
 
         // then
-        assertEquals(input, car.getName());
+        CarName expectedCarName = new CarName(input);
+        assertEquals(expectedCarName, car.getName());
     }
 
     @Test
