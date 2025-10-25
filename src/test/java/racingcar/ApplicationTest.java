@@ -66,6 +66,22 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 아무것도_입력_안했을때_예외() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException(""))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @Test
+    void 아무것도_입력_안했을때_예외1() {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("", ""))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
