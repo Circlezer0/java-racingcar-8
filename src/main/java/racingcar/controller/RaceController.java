@@ -1,6 +1,8 @@
 package racingcar.controller;
 
 import java.util.List;
+import racingcar.exception.RaceException;
+import racingcar.exception.code.RaceRoundErrorCode;
 import racingcar.model.car.CarName;
 import racingcar.model.car.CarStatus;
 import racingcar.model.car.Cars;
@@ -43,8 +45,11 @@ public class RaceController {
     }
 
     private void validateRounds(int rounds) {
-        if (rounds < 0 || rounds > MAX_TRY_COUNT) {
-            throw new IllegalArgumentException("시도 횟수는 0 이상 " + MAX_TRY_COUNT + " 이하만 가능합니다.");
+        if (rounds < 0) {
+            throw new RaceException(RaceRoundErrorCode.NEGATIVE_ROUND);
+        }
+        if (rounds > MAX_TRY_COUNT) {
+            throw new RaceException(RaceRoundErrorCode.MAX_ROUND_EXCEEDED);
         }
     }
 }
