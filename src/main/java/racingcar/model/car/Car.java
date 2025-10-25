@@ -24,6 +24,10 @@ public class Car {
         return position;
     }
 
+    /**
+     * 전달 받은 이동 전략에 따라 자동차를 이동시킨다.
+     * @param strategy 이동 전략
+     */
     public void move(MoveStrategy strategy) {
         if (strategy.canMove()) {
             position++;

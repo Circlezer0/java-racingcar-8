@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import racingcar.exception.RaceException;
 import racingcar.exception.code.RandomProviderErrorCode;
 
+// 최소, 최대 범위 내의 랜덤 정수를 제공하는 객체
 public class RandomIntProvider implements IntProvider {
     private final int min;
     private final int max;
