@@ -1,6 +1,8 @@
 package racingcar.view.handler;
 
 import camp.nextstep.edu.missionutils.Console;
+import racingcar.exception.RaceException;
+import racingcar.exception.code.InputException;
 
 public class InputHandler {
 
@@ -8,7 +10,7 @@ public class InputHandler {
         try {
             return Console.readLine();
         } catch (Exception e) {
-            throw new IllegalArgumentException("입력 도중 오류가 발생했습니다.");
+            throw new RaceException(InputException.READ_LINE_FAIL);
         }
     }
 
@@ -16,9 +18,9 @@ public class InputHandler {
         try {
             return Integer.parseInt(Console.readLine());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수를 입력해야 합니다.");
+            throw new RaceException(InputException.NUMBER_FORMAT_ERROR);
         } catch (Exception e) {
-            throw new IllegalArgumentException("입력 도중 오류가 발생했습니다.");
+            throw new RaceException(InputException.READ_LINE_FAIL);
         }
     }
 }
