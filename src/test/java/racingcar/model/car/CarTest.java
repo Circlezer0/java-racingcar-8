@@ -32,7 +32,7 @@ public class CarTest {
         Car car = Car.of("car");
 
         // when
-        car.move();
+        car.move(() -> true);
 
         // then
         assertEquals(1, car.getPosition());
