@@ -2,8 +2,6 @@ package racingcar.view;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import racingcar.exception.RaceException;
-import racingcar.exception.code.ViewException;
 import racingcar.model.car.CarName;
 import racingcar.model.car.CarStatus;
 import racingcar.view.handler.InputHandler;
