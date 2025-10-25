@@ -11,9 +11,6 @@ import racingcar.service.RaceService;
 import racingcar.view.RaceView;
 
 public class RaceController {
-
-    private static final int MAX_TRY_COUNT = 20;
-
     private final RaceService raceService;
     private final ParseService parseService;
     private final RaceView view;
