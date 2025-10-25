@@ -2,7 +2,7 @@ package racingcar.exception.code;
 
 import racingcar.exception.BaseErrorCode;
 
-public enum CarException implements BaseErrorCode {
+public enum CarErrorCode implements BaseErrorCode {
     NAME_NOT_EMPTY("자동차 이름은 비어 있을 수 없습니다."),
     MAX_NAME_LENGTH_EXCEEDED("자동차 이름의 최대 길이를 초과했습니다."),
     INVALID_NAME_FORMAT("자동차 이름에 허용되지 않는 문자가 포함되어 있습니다."),
@@ -14,7 +14,7 @@ public enum CarException implements BaseErrorCode {
 
     private final String message;
 
-    CarException(String message) {
+    CarErrorCode(String message) {
         this.message = message;
     }
 

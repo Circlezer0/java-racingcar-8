@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import racingcar.exception.RaceException;
-import racingcar.exception.code.CarException;
+import racingcar.exception.code.CarErrorCode;
 
 public class CarsFactory {
 
@@ -26,15 +26,15 @@ public class CarsFactory {
 
     private static void validateNames(List<String> names) {
         if (names == null || names.isEmpty()) {
-            throw new RaceException(CarException.CAR_NAME_LIST_NOT_EMPTY);
+            throw new RaceException(CarErrorCode.CAR_NAME_LIST_NOT_EMPTY);
         }
 
         if (names.size() > MAX_CAR_COUNT) {
-            throw new RaceException(CarException.CAR_SIZE_EXCEEDED);
+            throw new RaceException(CarErrorCode.CAR_SIZE_EXCEEDED);
         }
 
         if (hasDuplicate(names)) {
-            throw new RaceException(CarException.CAR_NAME_NOT_DUPLICATED);
+            throw new RaceException(CarErrorCode.CAR_NAME_NOT_DUPLICATED);
         }
     }
 

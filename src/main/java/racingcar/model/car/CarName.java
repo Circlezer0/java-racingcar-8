@@ -1,7 +1,7 @@
 package racingcar.model.car;
 
 import racingcar.exception.RaceException;
-import racingcar.exception.code.CarException;
+import racingcar.exception.code.CarErrorCode;
 
 public record CarName(String name) {
 
@@ -23,13 +23,13 @@ public record CarName(String name) {
 
     private static void validateName(String name) {
         if (name == null || name.isEmpty()) {
-            throw new RaceException(CarException.NAME_NOT_EMPTY);
+            throw new RaceException(CarErrorCode.NAME_NOT_EMPTY);
         }
         if (name.length() > MAX_NAME_LENGTH) {
-            throw new RaceException(CarException.MAX_NAME_LENGTH_EXCEEDED);
+            throw new RaceException(CarErrorCode.MAX_NAME_LENGTH_EXCEEDED);
         }
         if (!name.matches(NAME_PATTERN)) {
-            throw new RaceException(CarException.INVALID_NAME_FORMAT);
+            throw new RaceException(CarErrorCode.INVALID_NAME_FORMAT);
         }
     }
 }
