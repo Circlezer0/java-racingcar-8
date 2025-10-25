@@ -3,6 +3,8 @@ package racingcar.model.car;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import racingcar.exception.RaceException;
+import racingcar.exception.code.CarException;
 
 public class CarsFactory {
 
@@ -24,15 +26,15 @@ public class CarsFactory {
 
     private static void validateNames(List<String> names) {
         if (names == null || names.isEmpty()) {
-            throw new IllegalArgumentException("자동차 이름 목록은 null이거나 비어 있을 수 없습니다.");
+            throw new RaceException(CarException.CAR_NAME_LIST_NOT_EMPTY);
         }
 
         if (names.size() > MAX_CAR_COUNT) {
-            throw new IllegalArgumentException("자동차는 최대 " + MAX_CAR_COUNT + "대까지 생성할 수 있습니다.");
+            throw new RaceException(CarException.CAR_SIZE_EXCEEDED);
         }
 
         if (hasDuplicate(names)) {
-            throw new IllegalArgumentException("자동차 이름은 중복될 수 없습니다.");
+            throw new RaceException(CarException.CAR_NAME_NOT_DUPLICATED);
         }
     }
 
