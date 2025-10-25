@@ -59,6 +59,6 @@ public class RaceView {
 
     private String formatCarStatus(CarStatus status) {
         String positionMarkers = POSITION_MARKER.repeat(Math.max(0, status.position()));
-        return String.format(CAR_STATUS_FORMAT, status.name(), positionMarkers);
+        return String.format(CAR_STATUS_FORMAT, status.carName().name(), positionMarkers);
     }
 }
