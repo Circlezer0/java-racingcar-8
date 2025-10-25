@@ -1,5 +1,8 @@
 package racingcar.model.car;
 
+import racingcar.exception.RaceException;
+import racingcar.exception.code.CarException;
+
 public record CarName(String name) {
 
     private static final int MAX_NAME_LENGTH = 5;
@@ -20,13 +23,13 @@ public record CarName(String name) {
 
     private static void validateName(String name) {
         if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("이름은 null이거나 공백일 수 없습니다.");
+            throw new RaceException(CarException.NAME_NOT_EMPTY);
         }
         if (name.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException("이름은 5자를 초과할 수 없습니다.");
+            throw new RaceException(CarException.MAX_NAME_LENGTH_EXCEEDED);
         }
         if (!name.matches(NAME_PATTERN)) {
-            throw new IllegalArgumentException("영문/숫자/공백만 허용됩니다.");
+            throw new RaceException(CarException.INVALID_NAME_FORMAT);
         }
     }
 }
