@@ -15,6 +15,10 @@ public class RaceView {
     private static final String ROUND_START_MESSAGE = "실행 결과";
     private static final String OUTPUT_WINNER = "최종 우승자 : ";
 
+    private static final String CAR_STATUS_FORMAT = "%s : %s";
+    private static final String POSITION_MARKER = "-";
+    private static final String WINNER_DELIMITER = ", ";
+
 
     public RaceView(InputHandler inputHandler, OutputHandler outputHandler) {
         this.inputHandler = inputHandler;
@@ -47,15 +51,14 @@ public class RaceView {
     public void displayWinners(List<CarName> winnerNames) {
         String formattedWinners = winnerNames.stream()
                 .map(CarName::name)
-                .reduce((a, b) -> a + ", " + b)
+                .reduce((a, b) -> a + WINNER_DELIMITER + b)
                 .orElse("");
 
         outputHandler.printLine(OUTPUT_WINNER + formattedWinners);
     }
 
     private String formatCarStatus(CarStatus status) {
-        return status.name()
-                + " : "
-                + "-".repeat(Math.max(0, status.position()));
+        String positionMarkers = POSITION_MARKER.repeat(Math.max(0, status.position()));
+        return String.format(CAR_STATUS_FORMAT, status.name(), positionMarkers);
     }
 }
