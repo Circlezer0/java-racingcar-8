@@ -1,5 +1,7 @@
 package racingcar.model.car;
 
+import racingcar.model.strategy.MoveStrategy;
+
 public class Car {
     private final CarName name;
     private int position;
@@ -22,7 +24,9 @@ public class Car {
         return position;
     }
 
-    public void move() {
-        position++;
+    public void move(MoveStrategy strategy) {
+        if (strategy.canMove()) {
+            position++;
+        }
     }
 }

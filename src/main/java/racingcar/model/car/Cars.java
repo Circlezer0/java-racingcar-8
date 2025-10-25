@@ -30,10 +30,6 @@ public class Cars {
     }
 
     public void moveAll(MoveStrategy moveStrategy) {
-        for (Car car : carList) {
-            if (moveStrategy.canMove()) {
-                car.move();
-            }
-        }
+       carList.forEach(car -> car.move(moveStrategy));
     }
 }
