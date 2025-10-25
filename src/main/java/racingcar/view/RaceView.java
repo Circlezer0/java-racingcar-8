@@ -1,6 +1,9 @@
 package racingcar.view;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import racingcar.exception.RaceException;
+import racingcar.exception.code.ViewException;
 import racingcar.model.car.CarName;
 import racingcar.model.car.CarStatus;
 import racingcar.view.handler.InputHandler;
@@ -51,8 +54,7 @@ public class RaceView {
     public void displayWinners(List<CarName> winnerNames) {
         String formattedWinners = winnerNames.stream()
                 .map(CarName::name)
-                .reduce((a, b) -> a + WINNER_DELIMITER + b)
-                .orElse("");
+                .collect(Collectors.joining(WINNER_DELIMITER));
 
         outputHandler.printLine(OUTPUT_WINNER + formattedWinners);
     }
