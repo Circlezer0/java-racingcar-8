@@ -1,12 +1,11 @@
 package racingcar.controller;
 
 import java.util.List;
-import racingcar.exception.RaceException;
-import racingcar.exception.code.RaceRoundErrorCode;
 import racingcar.model.car.CarName;
 import racingcar.model.car.CarStatus;
 import racingcar.model.car.Cars;
 import racingcar.model.car.CarsFactory;
+import racingcar.model.car.RaceRound;
 import racingcar.service.ParseService;
 import racingcar.service.RaceService;
 import racingcar.view.RaceView;
@@ -28,28 +27,17 @@ public class RaceController {
     public void run() {
         String rawNames = view.readCarNames();
         List<String> names = parseService.parseCarNames(rawNames);
-        int rounds = view.readTryCount();
-
-        validateRounds(rounds);
+        RaceRound raceRound = new RaceRound(view.readTryCount());
 
         Cars cars = CarsFactory.of(names);
 
         view.displayRoundStartMessage();
-        for (int i = 0; i < rounds; i++) {
+        for (int i = 0; i < raceRound.round(); i++) {
             List<CarStatus> roundResult = raceService.playRound(cars);
             view.displayRoundResult(roundResult);
         }
 
         List<CarName> winners = raceService.getWinners(cars);
         view.displayWinners(winners);
-    }
-
-    private void validateRounds(int rounds) {
-        if (rounds < 0) {
-            throw new RaceException(RaceRoundErrorCode.NEGATIVE_ROUND);
-        }
-        if (rounds > MAX_TRY_COUNT) {
-            throw new RaceException(RaceRoundErrorCode.MAX_ROUND_EXCEEDED);
-        }
     }
 }
