@@ -34,7 +34,7 @@ public class CarsFactory {
         }
 
         if (hasDuplicate(names)) {
-            throw new RaceException(CarErrorCode.CAR_NAME_NOT_DUPLICATED);
+            throw new RaceException(CarErrorCode.CAR_NAME_DUPLICATED);
         }
     }
 
