@@ -1,6 +1,8 @@
 package racingcar.model.provider;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import racingcar.exception.RaceException;
+import racingcar.exception.code.RandomProviderErrorCode;
 
 public class RandomIntProvider implements IntProvider {
     private final int min;
@@ -19,10 +21,10 @@ public class RandomIntProvider implements IntProvider {
 
     private void rangeValidation(int min, int max) {
         if (min > max) {
-            throw new IllegalArgumentException("최소값은 최대값보다 클 수 없습니다.");
+            throw new RaceException(RandomProviderErrorCode.MIN_BIGGER_THAN_MAX);
         }
         if (min < 0) {
-            throw new IllegalArgumentException("최소값과 최대값은 음수일 수 없습니다.");
+            throw new RaceException(RandomProviderErrorCode.NEGATIVE_RANGE);
         }
     }
 }
