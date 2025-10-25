@@ -13,7 +13,7 @@ public class Cars {
 
     public List<CarStatus> getCarStatuses() {
         return carList.stream()
-                .map(car -> new CarStatus(car.getCarName(), car.getPosition()))
+                .map(CarStatus::from)
                 .toList();
     }
 
