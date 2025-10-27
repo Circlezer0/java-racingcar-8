@@ -1,7 +1,7 @@
 package racingcar.exception;
 
 public class RaceException extends IllegalArgumentException {
-    public RaceException(BaseErrorCode errorCode) {
+    public RaceException(RaceErrorCode errorCode) {
         super(errorCode.getMessage());
     }
 }

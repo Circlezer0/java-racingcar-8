@@ -2,7 +2,7 @@ package racingcar.view.handler;
 
 import camp.nextstep.edu.missionutils.Console;
 import racingcar.exception.RaceException;
-import racingcar.exception.code.InputErrorCode;
+import racingcar.exception.RaceErrorCode;
 
 public class InputHandler {
 
@@ -10,7 +10,7 @@ public class InputHandler {
         try {
             return Console.readLine();
         } catch (Exception e) {
-            throw new RaceException(InputErrorCode.READ_LINE_FAIL);
+            throw new RaceException(RaceErrorCode.READ_LINE_FAIL);
         }
     }
 
@@ -18,9 +18,9 @@ public class InputHandler {
         try {
             return Integer.parseInt(Console.readLine());
         } catch (NumberFormatException e) {
-            throw new RaceException(InputErrorCode.NUMBER_FORMAT_ERROR);
+            throw new RaceException(RaceErrorCode.NUMBER_FORMAT_ERROR);
         } catch (Exception e) {
-            throw new RaceException(InputErrorCode.READ_LINE_FAIL);
+            throw new RaceException(RaceErrorCode.READ_LINE_FAIL);
         }
     }
 }

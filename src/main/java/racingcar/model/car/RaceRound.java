@@ -1,7 +1,7 @@
 package racingcar.model.car;
 
 import racingcar.exception.RaceException;
-import racingcar.exception.code.RaceRoundErrorCode;
+import racingcar.exception.RaceErrorCode;
 
 public record RaceRound(int round) {
     private static final int MIN_ROUND = 0;
@@ -9,10 +9,10 @@ public record RaceRound(int round) {
 
     public RaceRound {
         if (round < MIN_ROUND) {
-            throw new RaceException(RaceRoundErrorCode.NEGATIVE_ROUND);
+            throw new RaceException(RaceErrorCode.NEGATIVE_ROUND);
         }
         if (round > MAX_ROUND) {
-            throw new RaceException(RaceRoundErrorCode.MAX_ROUND_EXCEEDED);
+            throw new RaceException(RaceErrorCode.MAX_ROUND_EXCEEDED);
         }
     }
 }

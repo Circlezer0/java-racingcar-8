@@ -2,7 +2,7 @@ package racingcar.view.handler;
 
 import java.util.List;
 import racingcar.exception.RaceException;
-import racingcar.exception.code.InputErrorCode;
+import racingcar.exception.RaceErrorCode;
 
 public class FakeInputHandler extends InputHandler {
 
@@ -16,7 +16,7 @@ public class FakeInputHandler extends InputHandler {
     @Override
     public String readLine() {
         if (currentIndex >= inputs.size()) {
-            throw new RaceException(InputErrorCode.READ_LINE_FAIL);
+            throw new RaceException(RaceErrorCode.READ_LINE_FAIL);
         }
         return inputs.get(currentIndex++);
     }
@@ -27,7 +27,7 @@ public class FakeInputHandler extends InputHandler {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new RaceException(InputErrorCode.NUMBER_FORMAT_ERROR);
+            throw new RaceException(RaceErrorCode.NUMBER_FORMAT_ERROR);
         }
     }
 }

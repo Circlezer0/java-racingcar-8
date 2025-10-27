@@ -2,7 +2,7 @@ package racingcar.model.car;
 
 import java.util.List;
 import racingcar.exception.RaceException;
-import racingcar.exception.code.CarErrorCode;
+import racingcar.exception.RaceErrorCode;
 
 public class CarsFactory {
 
@@ -12,7 +12,7 @@ public class CarsFactory {
 
     public static Cars of(List<String> names) {
         if (names == null || names.isEmpty()) {
-            throw new RaceException(CarErrorCode.CAR_NAME_LIST_NOT_EMPTY);
+            throw new RaceException(RaceErrorCode.CAR_NAME_LIST_NOT_EMPTY);
         }
 
         List<Car> cars = names.stream()
