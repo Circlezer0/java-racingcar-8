@@ -1,12 +1,18 @@
 package racingcar.model.car;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import racingcar.exception.RaceException;
+import racingcar.exception.code.CarErrorCode;
 import racingcar.model.strategy.MoveStrategy;
 
 public class Cars {
+    private static final int MAX_CAR_COUNT = 10;
     private final List<Car> carList;
 
     protected Cars(List<Car> carList) {
+        validateCars(carList);
         this.carList = List.copyOf(carList);
     }
 
@@ -43,5 +49,29 @@ public class Cars {
      */
     public void moveAll(MoveStrategy moveStrategy) {
        carList.forEach(car -> car.move(moveStrategy));
+    }
+
+
+    private static void validateCars(List<Car> cars) {
+        if (cars == null || cars.isEmpty()) {
+            throw new RaceException(CarErrorCode.CAR_NAME_LIST_NOT_EMPTY);
+        }
+
+        if (cars.size() > MAX_CAR_COUNT) {
+            throw new RaceException(CarErrorCode.CAR_SIZE_EXCEEDED);
+        }
+
+        if (hasDuplicateName(cars)) {
+            throw new RaceException(CarErrorCode.CAR_NAME_DUPLICATED);
+        }
+    }
+
+    private static boolean hasDuplicateName(List<Car> cars) {
+        Set<String> uniqueNames = cars.stream()
+                .map(Car::getCarName)
+                .map(CarName::name)
+                .collect(Collectors.toSet());
+
+        return uniqueNames.size() != cars.size();
     }
 }

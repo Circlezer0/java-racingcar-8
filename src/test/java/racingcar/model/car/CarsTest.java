@@ -160,6 +160,13 @@ class CarsTest {
     }
 
     @Test
+    @DisplayName("null 리스트 입력시 IllegalArgumentException")
+    void nullListErrorTest1() {
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> new Cars(null));
+    }
+
+    @Test
     @DisplayName("최대 개수 10개 초과시 IllegalArgumentException")
     void exceedMaxCarsErrorTest() {
         // given
